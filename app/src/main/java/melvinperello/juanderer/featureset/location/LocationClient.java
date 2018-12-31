@@ -1,6 +1,7 @@
 package melvinperello.juanderer.featureset.location;
 
 import android.location.Location;
+import android.os.Looper;
 
 /**
  * Location Client
@@ -44,6 +45,9 @@ public interface LocationClient {
      * @param interval
      */
     void setIntervalFromOtherApplications(long interval);
+
+
+    void setLooper(Looper looper);
 
     /**
      * Location received callback. this is called inside the built in callback of the location client.

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
@@ -43,6 +44,7 @@ public class GoogleFusedLocationClient implements LocationClient {
     private long mIntervalFromOtherApplication = 3000;
     private FusedLocationProviderClient mGoogleFusedLocationClient;
     private final GoogleLocationCallback mGoogleCallback = new GoogleLocationCallback();
+    private Looper mLooper;
 
     /**
      * Creates a Google Fused Location client.
@@ -70,7 +72,7 @@ public class GoogleFusedLocationClient implements LocationClient {
                         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                         .setInterval(this.mInterval)
                         .setFastestInterval(this.mIntervalFromOtherApplication)
-                , mGoogleCallback, null
+                , mGoogleCallback, this.mLooper
         );
         //
         this.mlocationClientRunning = true;
@@ -105,5 +107,10 @@ public class GoogleFusedLocationClient implements LocationClient {
     @Override
     public void setIntervalFromOtherApplications(long interval) {
         this.mIntervalFromOtherApplication = interval;
+    }
+
+    @Override
+    public void setLooper(Looper looper) {
+        this.mLooper = looper;
     }
 }

@@ -8,6 +8,7 @@ The Philippines is a developing nation with a great problem in its mass transpor
 
 
 The application should provide the user with:
+
 - prompt to a particular location
 
 - alarm to wake the user up incase of a long journey.
