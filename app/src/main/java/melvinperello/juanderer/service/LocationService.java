@@ -73,6 +73,8 @@ public class LocationService extends Service implements LocationClient.OnLocatio
             int startId = msg.arg1;
             //--------------------------------------------------------------------------------------
             // Start Location Service Client
+            mLocationPublisher.enablePublishing();
+            //
             mLocationClient = new GoogleFusedLocationClient(LocationService.this);
             mLocationClient.setLocationCallback(LocationService.this);
             mLocationClient.setLooper(mServiceLooper);
@@ -117,7 +119,8 @@ public class LocationService extends Service implements LocationClient.OnLocatio
     @Override
     public void onLocationReceived(Location location) {
         // publish available location
-        mLocationPublisher.publish(new LocationReceivedEvent(location));
+        LocationReceivedEvent event = new LocationReceivedEvent(location);
+        mLocationPublisher.publish(event);
     }
 
     @Override

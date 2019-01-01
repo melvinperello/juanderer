@@ -31,7 +31,7 @@ public class GREBLocationPublisher implements LocationPublisher {
 
     @Override
     public void publish(LocationReceivedEvent locationEvent) {
-        if (this.isPublishing()) {
+        if (this.publishing) {
             EventBus.getDefault().post(locationEvent);
             Log.i(TAG, "Location Event was published");
         }
